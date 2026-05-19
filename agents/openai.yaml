@@ -1,0 +1,7 @@
+interface:
+  display_name: "Mistral Brand"
+  short_description: "Generate Mistral-branded content"
+  brand_color: "#FA500F"
+  default_prompt: "Use $mistral-brand to create a concise Mistral AI branded artifact from my notes."
+policy:
+  allow_implicit_invocation: true

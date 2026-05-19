@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mistral Brand Artifact</title>
+  <style>
+    :root {
+      --mistral-red: #E10500;
+      --mistral-orange-dark: #FA500F;
+      --mistral-orange: #FF8205;
+      --mistral-orange-light: #FFAF00;
+      --mistral-yellow: #FFD800;
+      --mistral-beige-light: #FFFAEB;
+      --mistral-beige-medium: #FFF0C3;
+      --mistral-beige-dark: #E9E2CB;
+      --mistral-black: #000000;
+      --mistral-black-tinted: #1E1E1E;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background: var(--mistral-black-tinted);
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--mistral-black-tinted);
+    }
+
+    .artifact {
+      position: relative;
+      width: 1200px;
+      height: 630px;
+      overflow: hidden;
+      background:
+        linear-gradient(rgba(233, 226, 203, 0.48) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(233, 226, 203, 0.48) 1px, transparent 1px),
+        var(--mistral-beige-light);
+      background-size: 48px 48px;
+      padding: 64px;
+    }
+
+    .band {
+      position: absolute;
+      inset: 0 0 auto;
+      height: 118px;
+      background: var(--mistral-black-tinted);
+    }
+
+    .bars {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 118px;
+      display: grid;
+      grid-template-rows: repeat(5, 18px);
+    }
+
+    .bars span:nth-child(1) { background: var(--mistral-beige-medium); }
+    .bars span:nth-child(2) { background: var(--mistral-yellow); }
+    .bars span:nth-child(3) { background: var(--mistral-orange-light); }
+    .bars span:nth-child(4) { background: var(--mistral-orange); }
+    .bars span:nth-child(5) { background: var(--mistral-red); }
+
+    .content {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      align-content: end;
+      height: 100%;
+      padding-top: 160px;
+    }
+
+    .kicker {
+      margin: 0 0 16px;
+      color: var(--mistral-orange-dark);
+      font-size: 28px;
+      line-height: 1;
+      font-weight: 700;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 850px;
+      font-size: 82px;
+      line-height: 0.95;
+      letter-spacing: 0;
+    }
+
+    .logo {
+      position: absolute;
+      right: 54px;
+      bottom: 42px;
+      width: 42px;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+  <article class="artifact">
+    <div class="band"></div>
+    <div class="bars" aria-hidden="true">
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+    <div class="content">
+      <p class="kicker">Mistral AI</p>
+      <h1>Short branded message</h1>
+    </div>
+    <img class="logo" src="./mistral-brand-assets/m/m-orange.svg" alt="Mistral AI" />
+  </article>
+</body>
+</html>

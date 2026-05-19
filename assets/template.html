@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mistral Presentation</title>
+  <style>
+    :root {
+      --mistral-red: #E10500;
+      --mistral-orange-dark: #FA500F;
+      --mistral-orange: #FF8205;
+      --mistral-orange-light: #FFAF00;
+      --mistral-yellow: #FFD800;
+      --mistral-beige-light: #FFFAEB;
+      --mistral-beige-medium: #FFF0C3;
+      --mistral-beige-dark: #E9E2CB;
+      --mistral-black: #000000;
+      --mistral-black-tinted: #1E1E1E;
+      --slide-w: 1600px;
+      --slide-h: 900px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--mistral-black-tinted);
+      color: var(--mistral-black-tinted);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    main.deck {
+      width: 100vw;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      gap: 32px;
+      padding: 32px;
+    }
+
+    section.slide {
+      position: relative;
+      width: min(var(--slide-w), calc(100vw - 64px));
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      background:
+        linear-gradient(rgba(233, 226, 203, 0.45) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(233, 226, 203, 0.45) 1px, transparent 1px),
+        var(--mistral-beige-light);
+      background-size: 54px 54px;
+      display: grid;
+      padding: 68px;
+    }
+
+    .black-band {
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 28%;
+      background: var(--mistral-black-tinted);
+    }
+
+    .rainbow-bars {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 28%;
+      display: grid;
+      grid-template-rows: repeat(5, 28px);
+    }
+
+    .rainbow-bars span:nth-child(1) { background: var(--mistral-beige-medium); }
+    .rainbow-bars span:nth-child(2) { background: var(--mistral-yellow); }
+    .rainbow-bars span:nth-child(3) { background: var(--mistral-orange-light); }
+    .rainbow-bars span:nth-child(4) { background: var(--mistral-orange); }
+    .rainbow-bars span:nth-child(5) { background: var(--mistral-red); }
+
+    .logo {
+      position: absolute;
+      left: 68px;
+      bottom: 44px;
+      width: 44px;
+      height: auto;
+    }
+
+    .kicker {
+      font-size: 22px;
+      line-height: 1.15;
+      font-weight: 700;
+      color: var(--mistral-orange-dark);
+      margin: 0 0 20px;
+    }
+
+    h1, h2, h3, p { margin: 0; }
+
+    h1 {
+      max-width: 980px;
+      font-size: 86px;
+      line-height: 0.96;
+      letter-spacing: 0;
+      font-weight: 700;
+    }
+
+    h2 {
+      max-width: 960px;
+      font-size: 58px;
+      line-height: 1;
+      letter-spacing: 0;
+      font-weight: 700;
+    }
+
+    .body {
+      font-size: 24px;
+      line-height: 1.28;
+      max-width: 640px;
+    }
+
+    .grid-2, .grid-3, .grid-4 {
+      display: grid;
+      gap: 24px;
+      align-self: end;
+    }
+
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+    .block {
+      min-height: 170px;
+      border: 2px solid var(--mistral-black-tinted);
+      background: rgba(255, 250, 235, 0.86);
+      padding: 22px;
+    }
+
+    .block strong {
+      display: block;
+      font-size: 26px;
+      line-height: 1.05;
+      margin-bottom: 12px;
+    }
+
+    .block span {
+      display: block;
+      font-size: 18px;
+      line-height: 1.25;
+    }
+
+    .section-number {
+      position: absolute;
+      right: 68px;
+      bottom: 48px;
+      font-size: 180px;
+      line-height: 0.8;
+      font-weight: 700;
+      color: var(--mistral-red);
+    }
+
+    .cover-content {
+      align-self: end;
+      z-index: 1;
+      padding-bottom: 80px;
+    }
+
+    .content-top {
+      display: grid;
+      gap: 18px;
+      align-content: start;
+    }
+
+    @media (max-width: 900px) {
+      main.deck { padding: 12px; }
+      section.slide {
+        width: calc(100vw - 24px);
+        padding: 34px;
+      }
+      h1 { font-size: 42px; }
+      h2 { font-size: 34px; }
+      .body { font-size: 16px; }
+      .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr 1fr; gap: 12px; }
+      .block { min-height: 104px; padding: 12px; }
+      .block strong { font-size: 16px; }
+      .block span { font-size: 12px; }
+      .logo { left: 34px; bottom: 24px; width: 28px; }
+      .section-number { right: 34px; bottom: 28px; font-size: 84px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="deck">
+    <section class="slide">
+      <div class="black-band"></div>
+      <div class="rainbow-bars" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
+      <div class="cover-content">
+        <p class="kicker">Mistral AI</p>
+        <h1>Presentation Title</h1>
+      </div>
+      <img class="logo" src="./mistral-brand-assets/m/m-orange.svg" alt="Mistral AI" />
+    </section>
+
+    <section class="slide">
+      <div class="content-top">
+        <p class="kicker">Subtitle</p>
+        <h2>Headline for a Mistral-style content slide</h2>
+        <p class="body">Use one focused message, concise body copy, and a modular grid that can scale from two to four blocks.</p>
+      </div>
+      <div class="grid-3">
+        <div class="block"><strong>Title</strong><span>Short supporting copy.</span></div>
+        <div class="block"><strong>Title</strong><span>Short supporting copy.</span></div>
+        <div class="block"><strong>Title</strong><span>Short supporting copy.</span></div>
+      </div>
+      <img class="logo" src="./mistral-brand-assets/m/m-orange.svg" alt="Mistral AI" />
+    </section>
+
+    <section class="slide">
+      <div class="content-top">
+        <p class="kicker">Thank you</p>
+        <h2>Closing message</h2>
+        <p class="body">Add a contact, next step, or call to action here.</p>
+      </div>
+      <div class="section-number">M</div>
+      <img class="logo" src="./mistral-brand-assets/mistral-logo/mistral-logo-color-black.svg" alt="Mistral AI" />
+    </section>
+  </main>
+</body>
+</html>
