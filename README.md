@@ -15,6 +15,7 @@ The skill uses official public Mistral brand assets and public brand guidance fr
 - `assets/template.html` - starter HTML slide deck
 - `assets/content-template.html` - starter thumbnail/card/content artifact
 - `assets/mistral-brand-assets/` - official Mistral logo and icon assets
+- `examples/build-a-workflow/` - complete generated deck example from a Mistral Docs quickstart
 - `scripts/validate_mistral_artifact.mjs` - validates HTML artifacts against core brand rules
 - `scripts/export_html_artifact.mjs` - exports HTML artifacts to PDF/PNG when Playwright is available
 
@@ -62,6 +63,35 @@ Use $mistral-brand to create a 10-slide product overview deck from this outline.
 
 ```text
 Use $mistral-brand to make a 1200x630 thumbnail for this developer tutorial.
+```
+
+## Included Examples
+
+### Build a workflow quickstart deck
+
+This repository includes a complete slide deck example generated from the Mistral Docs page [Build a workflow](https://docs.mistral.ai/getting-started/quickstarts/developer/build-a-workflow).
+
+- HTML source: `examples/build-a-workflow/index.html`
+- PDF export: `examples/build-a-workflow/mistral-workflow-quickstart.pdf`
+- PowerPoint export: `examples/build-a-workflow/mistral-workflow-quickstart.pptx`
+- Contact sheet: `examples/build-a-workflow/contact-sheet.jpg`
+
+Preview the HTML example directly:
+
+```text
+file:///path/to/mistral-brand/examples/build-a-workflow/index.html
+```
+
+Validate the example:
+
+```bash
+node scripts/validate_mistral_artifact.mjs examples/build-a-workflow/index.html
+```
+
+Export the example to PDF and PNG slides:
+
+```bash
+node scripts/export_html_artifact.mjs examples/build-a-workflow/index.html --out examples/build-a-workflow/exported --pdf --png --selector .slide
 ```
 
 ## Validation

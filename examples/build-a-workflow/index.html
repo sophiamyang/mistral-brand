@@ -1,0 +1,544 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mistral Workflows Quickstart</title>
+  <style>
+    :root {
+      --mistral-red: #E10500;
+      --mistral-orange-dark: #FA500F;
+      --mistral-orange: #FF8205;
+      --mistral-orange-light: #FFAF00;
+      --mistral-yellow: #FFD800;
+      --mistral-beige-light: #FFFAEB;
+      --mistral-beige-medium: #FFF0C3;
+      --mistral-beige-dark: #E9E2CB;
+      --mistral-black: #000000;
+      --mistral-black-tinted: #1E1E1E;
+      --slide-w: 1600px;
+      --slide-h: 900px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--mistral-black-tinted);
+      color: var(--mistral-black-tinted);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    main.deck {
+      width: 100vw;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      gap: 32px;
+      padding: 32px;
+    }
+
+    section.slide {
+      position: relative;
+      width: var(--slide-w);
+      height: var(--slide-h);
+      overflow: hidden;
+      background:
+        linear-gradient(rgba(233, 226, 203, 0.55) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(233, 226, 203, 0.55) 1px, transparent 1px),
+        var(--mistral-beige-light);
+      background-size: 56px 56px;
+      display: grid;
+      padding: 70px;
+    }
+
+    .black-band {
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 258px;
+      background: var(--mistral-black-tinted);
+    }
+
+    .rainbow-bars {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 258px;
+      display: grid;
+      grid-template-rows: repeat(5, 27px);
+    }
+
+    .rainbow-bars span:nth-child(1) { background: var(--mistral-beige-medium); }
+    .rainbow-bars span:nth-child(2) { background: var(--mistral-yellow); }
+    .rainbow-bars span:nth-child(3) { background: var(--mistral-orange-light); }
+    .rainbow-bars span:nth-child(4) { background: var(--mistral-orange); }
+    .rainbow-bars span:nth-child(5) { background: var(--mistral-red); }
+
+    .logo {
+      position: absolute;
+      left: 70px;
+      bottom: 42px;
+      height: 38px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .mark {
+      position: absolute;
+      right: 70px;
+      bottom: 44px;
+      width: 38px;
+      height: 38px;
+    }
+
+    .page {
+      position: absolute;
+      right: 70px;
+      bottom: 48px;
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .source {
+      position: absolute;
+      left: 126px;
+      bottom: 51px;
+      font-size: 15px;
+      color: rgba(30, 30, 30, 0.66);
+    }
+
+    .kicker {
+      font-size: 21px;
+      line-height: 1.1;
+      font-weight: 700;
+      color: var(--mistral-orange-dark);
+      margin: 0 0 20px;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3, p, pre { margin: 0; }
+
+    h1 {
+      max-width: 1050px;
+      font-size: 86px;
+      line-height: 0.95;
+      letter-spacing: 0;
+      font-weight: 700;
+    }
+
+    h2 {
+      max-width: 1000px;
+      font-size: 58px;
+      line-height: 1;
+      letter-spacing: 0;
+      font-weight: 700;
+    }
+
+    .lead {
+      font-size: 29px;
+      line-height: 1.22;
+      max-width: 760px;
+    }
+
+    .small {
+      font-size: 20px;
+      line-height: 1.28;
+      color: rgba(30, 30, 30, 0.82);
+    }
+
+    .cover-content {
+      align-self: end;
+      z-index: 1;
+      padding-bottom: 84px;
+    }
+
+    .cover-content .kicker { color: var(--mistral-beige-light); }
+    .cover-content h1 { color: var(--mistral-black-tinted); }
+
+    .top {
+      display: grid;
+      gap: 16px;
+      align-content: start;
+    }
+
+    .content {
+      display: grid;
+      gap: 28px;
+      align-content: start;
+      z-index: 1;
+    }
+
+    .grid-2, .grid-3, .grid-4 {
+      display: grid;
+      gap: 22px;
+      align-self: end;
+      z-index: 1;
+    }
+
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+    .block {
+      min-height: 168px;
+      border: 2px solid var(--mistral-black-tinted);
+      background: rgba(255, 250, 235, 0.92);
+      padding: 22px;
+    }
+
+    .block.dark {
+      color: var(--mistral-beige-light);
+      background: var(--mistral-black-tinted);
+    }
+
+    .block.orange { background: var(--mistral-orange-light); }
+    .block.red { color: var(--mistral-beige-light); background: var(--mistral-red); }
+    .block.medium { background: var(--mistral-beige-medium); }
+
+    .block strong {
+      display: block;
+      font-size: 27px;
+      line-height: 1.05;
+      margin-bottom: 12px;
+    }
+
+    .block span {
+      display: block;
+      font-size: 19px;
+      line-height: 1.25;
+    }
+
+    .agenda {
+      display: grid;
+      grid-template-columns: 0.75fr 1fr;
+      gap: 24px;
+      align-items: stretch;
+      margin-top: 36px;
+    }
+
+    .agenda .num {
+      font-size: 96px;
+      line-height: 0.85;
+      font-weight: 700;
+      color: var(--mistral-red);
+    }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0;
+      align-items: center;
+      margin-top: 26px;
+      border: 2px solid var(--mistral-black-tinted);
+      background: var(--mistral-beige-light);
+    }
+
+    .step {
+      min-height: 255px;
+      padding: 28px 22px;
+      border-right: 2px solid var(--mistral-black-tinted);
+      position: relative;
+    }
+
+    .step:last-child { border-right: 0; }
+    .step:nth-child(2) { background: var(--mistral-beige-medium); }
+    .step:nth-child(3) { background: var(--mistral-yellow); }
+    .step:nth-child(4) { background: var(--mistral-orange-light); }
+    .step:nth-child(5) { color: var(--mistral-beige-light); background: var(--mistral-red); }
+
+    .step .n {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 34px;
+    }
+
+    .step strong {
+      display: block;
+      font-size: 28px;
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+
+    .step span {
+      display: block;
+      font-size: 18px;
+      line-height: 1.22;
+    }
+
+    .terminal {
+      background: var(--mistral-black-tinted);
+      color: var(--mistral-beige-light);
+      border: 2px solid var(--mistral-black-tinted);
+      padding: 28px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 25px;
+      line-height: 1.36;
+      white-space: pre-wrap;
+    }
+
+    .terminal .cmd { color: var(--mistral-yellow); }
+    .terminal .key { color: var(--mistral-orange-light); }
+    .terminal .str { color: var(--mistral-orange); }
+    .terminal .ok { color: var(--mistral-beige-medium); }
+
+    .diagram {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 20px;
+      margin-top: 20px;
+      align-items: stretch;
+    }
+
+    .node {
+      border: 2px solid var(--mistral-black-tinted);
+      background: var(--mistral-beige-light);
+      min-height: 190px;
+      padding: 24px;
+      display: grid;
+      align-content: center;
+      text-align: center;
+    }
+
+    .node.black {
+      background: var(--mistral-black-tinted);
+      color: var(--mistral-beige-light);
+    }
+
+    .node.orange { background: var(--mistral-orange-light); }
+    .node strong { font-size: 30px; line-height: 1; margin-bottom: 10px; }
+    .node span { font-size: 18px; line-height: 1.25; }
+
+    .arrow {
+      position: relative;
+      height: 28px;
+      background: var(--mistral-red);
+      margin: 80px -10px 0;
+    }
+
+    .arrow:after {
+      content: "";
+      position: absolute;
+      right: -28px;
+      top: -14px;
+      border-left: 28px solid var(--mistral-red);
+      border-top: 28px solid transparent;
+      border-bottom: 28px solid transparent;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 0.82fr 1.18fr;
+      gap: 36px;
+      align-items: start;
+      margin-top: 26px;
+    }
+
+    .callout {
+      border-left: 16px solid var(--mistral-red);
+      padding: 8px 0 8px 24px;
+      font-size: 32px;
+      line-height: 1.12;
+      font-weight: 700;
+    }
+
+    .section-number {
+      position: absolute;
+      right: 70px;
+      bottom: 46px;
+      font-size: 174px;
+      line-height: 0.8;
+      font-weight: 700;
+      color: var(--mistral-red);
+    }
+
+    .big-m {
+      position: absolute;
+      right: 70px;
+      bottom: 80px;
+      width: 360px;
+      opacity: 0.12;
+    }
+
+    @page {
+      size: 1600px 900px;
+      margin: 0;
+    }
+
+    @media print {
+      body { background: white; }
+      main.deck { display: block; padding: 0; }
+      section.slide { break-after: page; page-break-after: always; }
+    }
+  </style>
+</head>
+<body>
+  <main class="deck">
+    <section class="slide">
+      <div class="black-band"></div>
+      <div class="rainbow-bars" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
+      <div class="cover-content">
+        <p class="kicker">Developer quickstart</p>
+        <h1>Build a durable AI workflow</h1>
+      </div>
+      <img class="logo" src="../../assets/mistral-brand-assets/mistral-logo/mistral-logo-color-black.svg" alt="Mistral AI" />
+    </section>
+
+    <section class="slide">
+      <div class="content">
+        <div class="top">
+          <p class="kicker">01 / What you are building</p>
+          <h2>Workflows move AI pipelines from a script to a durable system.</h2>
+          <p class="lead">Your code stays in your environment. Mistral handles orchestration, state, retries, and observability so multi-step work can survive crashes and long waits.</p>
+        </div>
+        <div class="grid-3">
+          <div class="block dark"><strong>Local code</strong><span>The worker runs where your project, dependencies, and secrets already live.</span></div>
+          <div class="block medium"><strong>Managed state</strong><span>The platform tracks workflow runs and resumes from completed activities.</span></div>
+          <div class="block orange"><strong>Visible execution</strong><span>Runs can be launched and watched from Console or from the Makefile.</span></div>
+        </div>
+      </div>
+      <img class="mark" src="../../assets/mistral-brand-assets/m/m-orange.svg" alt="Mistral AI" />
+      <p class="source">Source: docs.mistral.ai / Build a workflow</p>
+      <p class="page">02</p>
+    </section>
+
+    <section class="slide">
+      <div class="content">
+        <div class="top">
+          <p class="kicker">02 / Runbook</p>
+          <h2>The quickstart is a five-part loop: scaffold, inspect, run, trigger, verify.</h2>
+        </div>
+        <div class="flow">
+          <div class="step"><div class="n">01</div><strong>Scaffold</strong><span>Create a ready-to-run Python project with the workflows CLI.</span></div>
+          <div class="step"><div class="n">02</div><strong>Inspect</strong><span>Read the example workflow and its activity boundary.</span></div>
+          <div class="step"><div class="n">03</div><strong>Worker</strong><span>Connect to Mistral, register the workflow, wait for tasks.</span></div>
+          <div class="step"><div class="n">04</div><strong>Trigger</strong><span>Start an execution from Makefile or Console.</span></div>
+          <div class="step"><div class="n">05</div><strong>Verify</strong><span>Confirm the returned result and stop the worker.</span></div>
+        </div>
+      </div>
+      <img class="mark" src="../../assets/mistral-brand-assets/m/m-orange.svg" alt="Mistral AI" />
+      <p class="page">03</p>
+    </section>
+
+    <section class="slide">
+      <div class="content">
+        <div class="top">
+          <p class="kicker">03 / Prerequisites and scaffold</p>
+          <h2>Start with three requirements, then let the CLI create the project shell.</h2>
+        </div>
+        <div class="split">
+          <div class="grid-1">
+            <div class="block dark"><strong>Required</strong><span>Mistral API key, Python 3.12+, and uv with uvx available.</span></div>
+            <div class="block medium" style="margin-top:22px;"><strong>Generated project</strong><span>The default directory is my-workflow, with environment configuration for the API key.</span></div>
+          </div>
+          <pre class="terminal"><span class="cmd">uvx mistralai-workflows-cli setup</span>
+
+<span class="ok"># Open the generated directory</span>
+<span class="cmd">cd my-workflow</span></pre>
+        </div>
+      </div>
+      <img class="mark" src="../../assets/mistral-brand-assets/m/m-orange.svg" alt="Mistral AI" />
+      <p class="page">04</p>
+    </section>
+
+    <section class="slide">
+      <div class="content">
+        <div class="top">
+          <p class="kicker">04 / The workflow contract</p>
+          <h2>Activities are durable steps; the workflow definition is the triggerable unit.</h2>
+        </div>
+        <div class="split">
+          <div class="callout">If the process crashes mid-run, Mistral can replay from the last completed activity.</div>
+          <pre class="terminal"><span class="key">@workflows.activity()</span>
+async def greet(name: str) -> str:
+    return f"Hello, {<span class="str">name</span>}!"
+
+<span class="key">@workflows.workflow.define</span>(
+    name=<span class="str">"hello-world"</span>
+)
+class HelloWorkflow:
+    <span class="key">@workflows.workflow.entrypoint</span>
+    async def run(self, input):
+        return await greet(input.name)</pre>
+        </div>
+      </div>
+      <img class="mark" src="../../assets/mistral-brand-assets/m/m-orange.svg" alt="Mistral AI" />
+      <p class="page">05</p>
+    </section>
+
+    <section class="slide">
+      <div class="content">
+        <div class="top">
+          <p class="kicker">05 / Runtime architecture</p>
+          <h2>The worker is the bridge between local execution and managed orchestration.</h2>
+        </div>
+        <div class="diagram">
+          <div class="node black"><strong>Your project</strong><span>Workflow code, activities, dependencies, secrets</span></div>
+          <div class="arrow" aria-hidden="true"></div>
+          <div class="node orange"><strong>Worker</strong><span>Registers workflow and waits for tasks</span></div>
+        </div>
+        <div class="diagram" style="grid-template-columns: 1fr 90px 1fr; margin-top:20px;">
+          <div class="node"><strong>Mistral API</strong><span>Orchestration, state, retries, observability</span></div>
+          <div class="arrow" aria-hidden="true"></div>
+          <div class="node"><strong>Console</strong><span>Start workflow and watch executions</span></div>
+        </div>
+      </div>
+      <img class="mark" src="../../assets/mistral-brand-assets/m/m-orange.svg" alt="Mistral AI" />
+      <p class="page">06</p>
+    </section>
+
+    <section class="slide">
+      <div class="content">
+        <div class="top">
+          <p class="kicker">06 / Trigger and verify</p>
+          <h2>Keep the worker open, then start a run from a second terminal or Console.</h2>
+        </div>
+        <div class="split">
+          <pre class="terminal"><span class="cmd">make start-worker</span>
+
+<span class="cmd">make execute</span> workflow=<span class="str">hello-world</span> input=<span class="str">'{"name":"World"}'</span>
+
+<span class="ok">{
+  "result": "Hello, World! Welcome to Mistral Workflows."
+}</span></pre>
+          <div class="grid-1">
+            <div class="block medium"><strong>Console path</strong><span>Workflows sidebar -> hello-world -> Start Workflow -> pass JSON input -> Executions tab.</span></div>
+            <div class="block red" style="margin-top:22px;"><strong>Troubleshooting</strong><span>If the worker shows a connection error, confirm the API key and that the worker is still running.</span></div>
+          </div>
+        </div>
+      </div>
+      <img class="mark" src="../../assets/mistral-brand-assets/m/m-orange.svg" alt="Mistral AI" />
+      <p class="page">07</p>
+    </section>
+
+    <section class="slide">
+      <div class="content">
+        <div class="top">
+          <p class="kicker">07 / What to remember</p>
+          <h2>The minimal workflow is small, but the operating model is production-shaped.</h2>
+        </div>
+        <div class="grid-4">
+          <div class="block dark"><strong>Define</strong><span>Name the workflow so it can be registered and triggered.</span></div>
+          <div class="block"><strong>Isolate</strong><span>Mark durable steps with the activity decorator.</span></div>
+          <div class="block orange"><strong>Run</strong><span>Use the worker as the long-lived task executor.</span></div>
+          <div class="block red"><strong>Observe</strong><span>Follow executions from Console and verify outputs.</span></div>
+        </div>
+      </div>
+      <img class="mark" src="../../assets/mistral-brand-assets/m/m-orange.svg" alt="Mistral AI" />
+      <p class="page">08</p>
+    </section>
+
+    <section class="slide">
+      <div class="content">
+        <p class="kicker">Next steps</p>
+        <h2>Extend the skeleton into real AI work.</h2>
+        <p class="lead">Use the quickstart as the smallest reliable loop, then move into core concepts, cookbook examples, and durable agent patterns.</p>
+      </div>
+      <img class="big-m" src="../../assets/mistral-brand-assets/m/m-orange.svg" alt="" />
+      <div class="section-number">M</div>
+      <img class="logo" src="../../assets/mistral-brand-assets/mistral-logo/mistral-logo-color-black.svg" alt="Mistral AI" />
+    </section>
+  </main>
+</body>
+</html>
