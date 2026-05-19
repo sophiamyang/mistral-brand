@@ -71,10 +71,12 @@ Use $mistral-brand to make a 1200x630 thumbnail for this developer tutorial.
 
 This repository includes a complete slide deck example generated from the Mistral Docs page [Build a workflow](https://docs.mistral.ai/getting-started/quickstarts/developer/build-a-workflow).
 
-- HTML source: `examples/build-a-workflow/index.html`
-- PDF export: `examples/build-a-workflow/mistral-workflow-quickstart.pdf`
-- PowerPoint export: `examples/build-a-workflow/mistral-workflow-quickstart.pptx`
-- Contact sheet: `examples/build-a-workflow/contact-sheet.jpg`
+![Contact sheet for the Build a workflow quickstart deck](examples/build-a-workflow/contact-sheet.jpg)
+
+- [HTML source](examples/build-a-workflow/index.html)
+- [PDF export](examples/build-a-workflow/mistral-workflow-quickstart.pdf)
+- [PowerPoint export](examples/build-a-workflow/mistral-workflow-quickstart.pptx)
+- [Contact sheet](examples/build-a-workflow/contact-sheet.jpg)
 
 Preview the HTML example directly:
 
