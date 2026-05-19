@@ -4,7 +4,7 @@ A reusable AI-agent skill for generating Mistral AI branded content: slide decks
 
 Repository: https://github.com/sophiamyang/mistral-brand
 
-The skill uses official public Mistral brand assets and public brand guidance from the [Mistral AI brand page](https://mistral.ai/brand). Anything bundled here for branding is public: logo/icon assets, color values, typography guidance, and high-level visual rules. It does not bundle any private presentation template PDF.
+The skill uses official public Mistral brand assets and public brand guidance from the [Mistral AI brand page](https://mistral.ai/brand). Anything bundled here for branding is public: logo/icon assets, color values, typography guidance, and high-level visual rules. 
 
 ## What It Includes
 
@@ -126,4 +126,3 @@ node scripts/export_html_artifact.mjs path/to/deck.html --out exports --pdf --pn
 - Preserve logo aspect ratios.
 - Branding reference: https://mistral.ai/brand
 - Bundled branding assets and rules are based on public Mistral brand materials.
-- Do not include private deck templates or source PDFs in public distributions.
